@@ -58,6 +58,27 @@ class DB_Functions
 			return false;
 		}
 	}
+	public function changePassword($email, $password, $newpassword)
+	{
+		$sql="select * from user where email='$email'";
+		$result=mysqli_query($this->db->connect(),$sql) ;
+		
+		$rows=mysqli_fetch_array($result);
+		// return $rows;
+		
+		if($password == $rows["password"])
+		{
+			$sql="update user set password='$newpassword', update_date=NOW() 
+				where email='$email'";
+			$result=mysqli_query($this->db->connect(),$sql) ;
+			return $result;
+		}
+		else //khong co user
+		{
+			//echo "khong co user ne ba";
+			return false;
+		}
+	}
 	
 	//kiem tra email da co nguoi dung chua
 	public function checkUser($email)
