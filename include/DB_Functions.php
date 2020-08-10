@@ -128,6 +128,14 @@ class DB_Functions
 				$result=mysqli_query($con,$sql);
 				return $result;
 			}
+
+			public function searchProducts($name)
+			{
+				$sql="select * from product where name like'%$name%'";
+				$con=$this->db->connect();
+				$result=mysqli_query($con,$sql);
+				return $result;
+			}
 			
 			public function updateProduct($id,$name,$price,$description)
 			{
